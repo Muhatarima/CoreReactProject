@@ -1,26 +1,28 @@
 import React from 'react'
+import friends from "../../data/friends.json"
 
 function Friends() {
-    const {id , name , picture , days_since_contact , tags , status} = friend 
   return (
     <div>
-        {Friends.map((friend)=>{
+      {friends.map((friend) => {
+        const { id, name, picture, days_since_contact, tags, status } = friend
 
+        return (
+          <div key={id}>
+            <div>
+              <img src={picture} alt={name} />
+            </div>
 
-    <div>
-       <div>
-        <img src="{friend.picture}" alt="" />
-       </div>
-       <h1>{friend.name}</h1>
-       <p>
-            {`${friend.days_since_contact}d ago`}
-       </p>
+            <h1>{name}</h1>
 
+            <p>{days_since_contact}d ago</p>
 
-    </div>
+            <p>{status}</p>
 
-
-        })}
+           
+          </div>
+        )
+      })}
     </div>
   )
 }
