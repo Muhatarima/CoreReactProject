@@ -10,7 +10,7 @@ relationships that matter most.
 </p>
 <div className='text-center mx-auto'><button className='btn mb-7 border-none  hover:bg-emerald-950 text-white bg-emerald-800'>+ Add a Friend</button>
 </div>
-<div className='mx-auto grid lg:grid-cols-4'>
+<div className='mx-auto grid items-center justify-center gap-2  lg:grid-cols-4'>
     <section className='w-60 bg-neutral-100 shadow-2xl py-9 '>
         <h1 className='font-3xl text-center font-semibold text-emerald-800'>10</h1>
         <p className='text-[#64748B] text-center '>Total Friends</p>
