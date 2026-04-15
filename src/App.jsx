@@ -1,4 +1,5 @@
 import Navber from "./components/Navber/Navber"
+import Hero from "./components/Hero/Hero"
 
 function App() {
 
@@ -6,7 +7,8 @@ function App() {
     <>
     
     <div className="min-h-screen bg-white"  >
-<Navber></Navber>
+      <Navber></Navber>
+      <Hero></Hero>
   </div>
     </>
   

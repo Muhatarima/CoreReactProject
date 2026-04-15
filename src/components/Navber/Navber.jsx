@@ -4,7 +4,7 @@ const Navber = () => {
 
     const [Active,setActive]=useState("Home")
   return (
-    <div  className="min-h-screen text-black bg-white">
+    <div  className=" text-black bg-white">
 
 
 <div className="navbar px-8 shadow-sm">
@@ -22,9 +22,9 @@ const Navber = () => {
 </p>  </div>
   
   <div className="navbar-end gap-2">
-    <button onClick={()=>setActive("Home")} className={Active === "Home" ? "btn btn-primary bg-emerald-900" : "btn btn-outline" } >Home</button>
-    <button onClick={()=>setActive("Timeline")} className={Active === "Timeline" ? " btn btn-primary bg-emerald-900" : "btn btn-outline"} >Timeline</button>
-    <button onClick={()=>setActive("Stats")} className={Active === "Stats" ? "btn btn-primary bg-emerald-900" : "btn btn-outline"} >Stats</button>
+    <button onClick={()=>setActive("Home")} className={Active === "Home" ? "btn border-none hover:bg-emerald-900 text-white bg-emerald-800" : "btn btn-outline" } >Home</button>
+    <button onClick={()=>setActive("Timeline")} className={Active === "Timeline" ? " btn border-none hover:bg-emerald-900 text-white bg-emerald-800" : "btn btn-outline"} >Timeline</button>
+    <button onClick={()=>setActive("Stats")} className={Active === "Stats" ? "btn border-none hover:bg-emerald-900 text-white bg-emerald-800" : "btn btn-outline"} >Stats</button>
   </div>
 </div>
 
