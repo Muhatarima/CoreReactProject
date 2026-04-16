@@ -25,7 +25,7 @@ relationships that matter most.
     </section>
     <section className='w-60  bg-neutral-100 shadow-2xl py-9' >
         <h1 className='font-3xl text-center font-semibold text-emerald-800'>12</h1>
-        <p className='text-[#64748B] text-center'>Interactions This Month</p>
+        <p className='text-[#64748B] text-center'>Interactions  This Month</p>
     </section>
 </div>
 

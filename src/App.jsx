@@ -2,6 +2,7 @@ import Navber from "./components/Navber/Navber"
 import Hero from "./components/Hero/Hero"
 import Friends from "./components/Friends/Friends"
 import friiends from './data/friends.json'
+import FriendDetails from "./components/Friends/FriendDetails"
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
       <Navber></Navber>
       <Hero></Hero>
       <Friends></Friends>
+    
   </div>
     </>
   
