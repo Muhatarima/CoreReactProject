@@ -1,6 +1,6 @@
 import React from 'react'
 import friends from "../../data/friends.json"
-import { useParams } from 'react-router-dom'
+import { useParams } from "react-router-dom";
 
 function FriendDetails() {
   const { id } = useParams()

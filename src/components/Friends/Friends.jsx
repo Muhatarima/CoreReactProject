@@ -1,7 +1,6 @@
 import React from 'react'
 import friends from "../../data/friends.json"
-import { Link } from 'react-router-dom'
-
+import { Link } from "react-router-dom";
 
 function Friends() {
   return (
