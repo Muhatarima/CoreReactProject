@@ -1,10 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import friends from "../../data/friends.json"
 import { useParams } from "react-router-dom";
+
 
 function FriendDetails() {
   const { id } = useParams()
   const friend = friends.find((item) => item.id === Number(id))
+  const [Card , setCard] = useState("")
+
+     function handleSetCrad(){
+      
+     alert("just called")
+     }
 
   if (!friend) {
     return <h2 className='text-center mt-10 text-red-500'>Friend not found</h2>
@@ -13,7 +20,7 @@ function FriendDetails() {
   const { name, picture, days_since_contact, tags, status, bio, email ,goal , next_due_date } = friend
 
   return (
-    <div className='max-w-6xl mx-auto flex gap-5 mt-8'>
+    <div className='max-w-6xl mx-auto  flex justify-evenly mt-8'>
       <div className='grid gap-3'>
         <div className='w-60 bg-white py-6 rounded-xl shadow'>
           <div className="flex justify-center items-center">
@@ -69,38 +76,40 @@ function FriendDetails() {
         </button>
       </div>
 
-      <div>
-        <section>
+      <div className='  grid gap-6 lg:grid-cols-3'>
+        <section className=' bg-white px-5'>
           <h3 className='text-3xl font-bold text-green-900 my-5 px-6'>{days_since_contact}</h3>
           <p className='mb-6 text-[#64748B] px-6'>Days Since Contact</p>
         </section>
 
-        <section>
+        <section className=' bg-white px-5'>
           <h3 className='text-3xl font-bold text-green-900 my-5 px-6'>{goal}</h3>
           <p className='mb-6 text-[#64748B] px-6'>Goals(Days)</p>
         </section>
 
-        <section>
+        <section className=' bg-white px-5'>
           <h3 className='text-3xl font-bold text-green-900 my-5 px-6'>{next_due_date}</h3>
           <p className='mb-6 text-[#64748B] px-6'>Next Due</p>
         </section>
 
-        <section>
+        <section className='lg:col-span-3 px-5 bg-white'>
           <div className='px-6'>
-           <div className='flex justify-between'>
-             <h3 className='text-3xl font-bold text-green-900 my-5'>Reminder</h3>
-             <button className='btn btn-outline px-4 py-2'>Edit</button>
+           <div className='flex justify-between items-center'>
+             <h3 className='text-3xl font-bold text-green-900 my-5'>Relationship Goal</h3>
+             <button className='btn btn-outline border-2 text-black border-black hover:bg-black hover:text-white px-2 py-1'>Edit</button>
            </div>
             
           </div>
 <p className='px-6 text-[#64748B] mt-2'>
-                {`Connects Every <span className="font-bold text-black text-sm">${goal} Days</span>`}
-            </p>        </section>
+  Connects Every <span className="font-bold text-black text-sm">{goal} Days</span>
+</p>       </section>
 
-        <section>
-          <h3 className='text-3xl font-bold text-green-900 my-5 px-6'>Action</h3>
-          <div className='px-6'>
-            <button className='btn btn-outline'>Send Message</button>
+        <section className='lg:col-span-3 px-5 bg-white'>
+          <h3 className='text-xl font-semibold text-green-900 my-5 px-6'>Quick Check-In</h3>
+          <div className='px-8 flex gap-2 justify-between'>
+            <button onClick={handleSetCrad} className='btn btn-outline border    hover:text-white   border-black text-black'>Call</button>
+            <button className='btn btn-outline border    hover:text-white  border-black text-black'>Text</button>
+            <button className='btn btn-outline borde     hover:text-white  border-black text-black'>Video</button>
           </div>
         </section>
       </div>
