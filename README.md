@@ -1,16 +1,36 @@
-# React + Vite
+# KeenKeeper
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+KeenKeeper is a friendship management web app that helps users keep track of meaningful relationships. Users can view friend cards, open detailed profiles, log quick check-ins like Call, Text, and Video, and monitor interaction history through a timeline and stats page.
 
-Currently, two official plugins are available:
+## Live Site
+https://taupe-unicorn-0a3157.netlify.app/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## GitHub Repository
+https://github.com/Muhatarima/CoreReactProject
 
-## React Compiler
+## Technologies Used
+- React
+- React Router DOM
+- Tailwind CSS
+- Recharts
+- React Toastify
+- Local Storage
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Key Features
+- View all friends in a responsive card layout
+- Open a dynamic friend details page by clicking a card
+- Log Call, Text, and Video interactions
+- Show interaction history on the Timeline page
+- Display friendship analytics with a pie chart
+- Save timeline data in local storage
+- Custom 404 page for invalid routes
+- Loading spinner while data is being fetched
 
-## Expanding the ESLint configuration
+## Project Overview
+This project is built to make friendship tracking simple and visual. It allows users to manage personal connections in an organized way, while also giving a quick summary of relationship activity through timeline records and analytics.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Run Locally
+
+```bash
+npm install
+npm run dev
