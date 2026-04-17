@@ -11,6 +11,10 @@ const router = createBrowserRouter([
         index: true,
         element: <Friends />
       },
+        {
+        path: "timeline",
+        element: <Timeline />
+      },
       {
         path: "friends/:id",
         element: <FriendDetails />

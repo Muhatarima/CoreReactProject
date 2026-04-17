@@ -1,17 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import friends from "../../data/friends.json"
-import { useParams } from "react-router-dom";
 
+import { useParams, useOutletContext } from "react-router-dom";
 
 function FriendDetails() {
   const { id } = useParams()
+  const { timeline, setTimeline } = useOutletContext()
   const friend = friends.find((item) => item.id === Number(id))
-  const [Card , setCard] = useState("")
 
-     function handleSetCrad(){
-      
-     alert("just called")
-     }
+
+   
 
   if (!friend) {
     return <h2 className='text-center mt-10 text-red-500'>Friend not found</h2>
@@ -19,6 +17,18 @@ function FriendDetails() {
 
   const { name, picture, days_since_contact, tags, status, bio, email ,goal , next_due_date } = friend
 
+ function handleAddTimeline(type) {
+  const newEntry = {
+    title: `${type} with ${name}`,
+    id: Date.now() ,
+    date: new Date().toLocaleDateString()
+  }
+
+  setTimeline([...timeline, newEntry])
+ 
+}
+  
+  
   return (
     <div className='max-w-6xl mx-auto  flex justify-evenly mt-8'>
       <div className='grid gap-3'>
@@ -107,9 +117,9 @@ function FriendDetails() {
         <section className='lg:col-span-3 px-5 bg-white'>
           <h3 className='text-xl font-semibold text-green-900 my-5 px-6'>Quick Check-In</h3>
           <div className='px-8 flex gap-2 justify-between'>
-            <button onClick={handleSetCrad} className='btn btn-outline border    hover:text-white   border-black text-black'>Call</button>
-            <button className='btn btn-outline border    hover:text-white  border-black text-black'>Text</button>
-            <button className='btn btn-outline borde     hover:text-white  border-black text-black'>Video</button>
+            <button nClick={() => handleAddTimeline("Call")}  className='btn btn-outline border    hover:text-white   border-black text-black'>Call</button>
+            <button nClick={() => handleAddTimeline("Text")} className='btn btn-outline border    hover:text-white  border-black text-black'>Text</button>
+            <button nClick={() => handleAddTimeline("Video")}  className='btn btn-outline borde     hover:text-white  border-black text-black'>Video</button>
           </div>
         </section>
       </div>
