@@ -1,127 +1,201 @@
-import React from 'react'
-import friends from "../../data/friends.json"
-
-import { useParams, useOutletContext } from "react-router-dom";
+import React, { useEffect, useState } from 'react'
+import { Link, useOutletContext, useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import Loader from '../Loader/Loader'
 
 function FriendDetails() {
   const { id } = useParams()
   const { timeline, setTimeline } = useOutletContext()
-  const friend = friends.find((item) => item.id === Number(id))
+  const [friend, setFriend] = useState(null)
+  const [loading, setLoading] = useState(true)
 
+  useEffect(() => {
+    const loadFriend = async () => {
+      try {
+        const res = await fetch('/friends.json')
+        const data = await res.json()
+        const found = data.find((item) => item.id === Number(id))
+        setFriend(found || null)
+      } catch (error) {
+        console.error(error)
+      } finally {
+        setLoading(false)
+      }
+    }
 
-   
+    loadFriend()
+  }, [id])
+
+  if (loading) return <Loader />
 
   if (!friend) {
-    return <h2 className='text-center mt-10 text-red-500'>Friend not found</h2>
+    return (
+      <div className="mx-auto max-w-6xl px-4 py-12">
+        <h2 className="text-3xl font-bold text-red-500">Friend not found</h2>
+      </div>
+    )
   }
 
-  const { name, picture, days_since_contact, tags, status, bio, email ,goal , next_due_date } = friend
+  const {
+    name,
+    picture,
+    days_since_contact,
+    tags,
+    status,
+    bio,
+    email,
+    goal,
+    next_due_date,
+  } = friend
 
- function handleAddTimeline(type) {
-  const newEntry = {
-    title: `${type} with ${name}`,
-    id: Date.now() ,
-    date: new Date().toLocaleDateString()
+  function handleAddTimeline(type) {
+    const newEntry = {
+      id: Date.now(),
+      type,
+      title: `${type} with ${name}`,
+      friendName: name,
+      date: new Date().toLocaleDateString(),
+    }
+
+    setTimeline([newEntry, ...timeline])
+    toast.success(`${type} logged`)
   }
 
-  setTimeline([...timeline, newEntry])
- 
-}
-  
-  
   return (
-    <div className='max-w-6xl mx-auto  flex justify-evenly mt-8'>
-      <div className='grid gap-3'>
-        <div className='w-60 bg-white py-6 rounded-xl shadow'>
-          <div className="flex justify-center items-center">
-            <img className='w-20 h-20 rounded-full' src={picture} alt={name} />
-          </div>
+    <div className="mx-auto max-w-6xl px-4 py-8">
+      <Link
+        to="/"
+        className="mb-6 inline-flex rounded-full bg-emerald-100 px-4 py-2 font-medium text-emerald-900"
+      >
+        ← Back Home
+      </Link>
 
-          <h1 className='font-bold text-center mb-4 text-black text-xl'>{name}</h1>
+      <div className="grid gap-6 lg:grid-cols-[340px_1fr]">
+        <div className="space-y-4">
+          <div className="rounded-2xl bg-white p-6 shadow-sm">
+            <div className="flex justify-center">
+              <img
+                className="h-24 w-24 rounded-full object-cover"
+                src={picture}
+                alt={name}
+              />
+            </div>
 
-          <p className='text-sm text-center text-[#64748B] mb-3'>
-            {days_since_contact}d ago
-          </p>
+            <h1 className="mt-4 text-center text-2xl font-extrabold text-slate-900">
+              {name}
+            </h1>
 
-          <div className='flex justify-center mb-3 items-center'>
-            <p
-              className={`badge text-white rounded-full px-2 border-none py-2 ${
-                status === "on-track"
-                  ? "bg-green-600"
-                  : status === "almost due"
-                  ? "bg-amber-300"
-                  : "bg-red-500"
-              }`}
-            >
-              {status}
-            </p>
-          </div>
+            <div className="mt-4 flex justify-center">
+              <span
+                className={`rounded-full px-3 py-2 text-sm font-semibold text-white ${
+                  status === 'on-track'
+                    ? 'bg-emerald-600'
+                    : status === 'almost due'
+                    ? 'bg-amber-400'
+                    : 'bg-red-500'
+                }`}
+              >
+                {status}
+              </span>
+            </div>
 
-          <div className='flex mt-1 items-center justify-center gap-2 flex-wrap'>
-            {tags.map((tag, index) => (
-              <div key={index}>
-                <button className='badge rounded-full text-black border-none px-2 py-3 bg-emerald-300'>
+            <div className="mt-4 flex flex-wrap justify-center gap-2">
+              {tags.map((tag, index) => (
+                <span
+                  key={index}
+                  className="rounded-full bg-emerald-100 px-3 py-1 text-sm font-medium text-emerald-900"
+                >
                   {tag}
-                </button>
-              </div>
-            ))}
+                </span>
+              ))}
+            </div>
+
+            <p className="mt-5 text-center text-slate-600">{bio}</p>
+            <p className="mt-3 text-center text-sm text-slate-500">{email}</p>
           </div>
 
-          <div className='text-center mt-3 px-3'>
-            <p className='text-[#64748B] mb-3 text-sm italic'>{bio}</p>
-            <p className='text-[#64748B] mb-1'>
-              <small>{email}</small>
-            </p>
-          </div>
+          <button className="w-full rounded-xl border border-slate-300 px-4 py-3 font-medium text-slate-800 transition hover:bg-slate-100">
+            ⏰ Snooze 2 Weeks
+          </button>
+          <button className="w-full rounded-xl border border-slate-300 px-4 py-3 font-medium text-slate-800 transition hover:bg-slate-100">
+            📦 Archive
+          </button>
+          <button className="w-full rounded-xl border border-red-300 px-4 py-3 font-medium text-red-600 transition hover:bg-red-600 hover:text-white">
+            🗑️ Delete
+          </button>
         </div>
 
-        <button className='btn btn-outline hover:text-white w-60 text-black border-2 py-4'>
-          Snooze 2 weeks
-        </button>
-        <button className='btn btn-outline hover:text-white border-2 w-60 text-black py-4'>
-          Archive
-        </button>
-        <button className='btn btn-outline hover:bg-red-600 hover:text-white hover:border-none border-2 w-60 text-red-600 py-4'>
-          Delete
-        </button>
-      </div>
+        <div className="space-y-6">
+          <div className="grid gap-4 md:grid-cols-3">
+            <div className="rounded-2xl bg-white p-5 shadow-sm">
+              <p className="text-sm text-slate-500">Days Since Contact</p>
+              <h3 className="mt-2 text-3xl font-extrabold text-emerald-900">
+                {days_since_contact}
+              </h3>
+            </div>
 
-      <div className='  grid gap-6 lg:grid-cols-3'>
-        <section className=' bg-white px-5'>
-          <h3 className='text-3xl font-bold text-green-900 my-5 px-6'>{days_since_contact}</h3>
-          <p className='mb-6 text-[#64748B] px-6'>Days Since Contact</p>
-        </section>
+            <div className="rounded-2xl bg-white p-5 shadow-sm">
+              <p className="text-sm text-slate-500">Goal</p>
+              <h3 className="mt-2 text-3xl font-extrabold text-emerald-900">
+                {goal} days
+              </h3>
+            </div>
 
-        <section className=' bg-white px-5'>
-          <h3 className='text-3xl font-bold text-green-900 my-5 px-6'>{goal}</h3>
-          <p className='mb-6 text-[#64748B] px-6'>Goals(Days)</p>
-        </section>
-
-        <section className=' bg-white px-5'>
-          <h3 className='text-3xl font-bold text-green-900 my-5 px-6'>{next_due_date}</h3>
-          <p className='mb-6 text-[#64748B] px-6'>Next Due</p>
-        </section>
-
-        <section className='lg:col-span-3 px-5 bg-white'>
-          <div className='px-6'>
-           <div className='flex justify-between items-center'>
-             <h3 className='text-3xl font-bold text-green-900 my-5'>Relationship Goal</h3>
-             <button className='btn btn-outline border-2 text-black border-black hover:bg-black hover:text-white px-2 py-1'>Edit</button>
-           </div>
-            
+            <div className="rounded-2xl bg-white p-5 shadow-sm">
+              <p className="text-sm text-slate-500">Next Due Date</p>
+              <h3 className="mt-2 text-xl font-extrabold text-emerald-900">
+                {next_due_date}
+              </h3>
+            </div>
           </div>
-<p className='px-6 text-[#64748B] mt-2'>
-  Connects Every <span className="font-bold text-black text-sm">{goal} Days</span>
-</p>       </section>
 
-        <section className='lg:col-span-3 px-5 bg-white'>
-          <h3 className='text-xl font-semibold text-green-900 my-5 px-6'>Quick Check-In</h3>
-          <div className='px-8 flex gap-2 justify-between'>
-            <button nClick={() => handleAddTimeline("Call")}  className='btn btn-outline border    hover:text-white   border-black text-black'>Call</button>
-            <button nClick={() => handleAddTimeline("Text")} className='btn btn-outline border    hover:text-white  border-black text-black'>Text</button>
-            <button nClick={() => handleAddTimeline("Video")}  className='btn btn-outline borde     hover:text-white  border-black text-black'>Video</button>
-          </div>
-        </section>
+          <section className="rounded-2xl bg-white p-6 shadow-sm">
+            <div className="flex items-center justify-between gap-4">
+              <h3 className="text-2xl font-extrabold text-emerald-900">
+                Relationship Goal
+              </h3>
+              <button className="rounded-full bg-emerald-100 px-4 py-2 font-medium text-emerald-900">
+                Edit
+              </button>
+            </div>
+
+            <p className="mt-4 text-slate-600">
+              Connect every{' '}
+              <span className="font-bold text-slate-900">{goal} days</span> to
+              keep this relationship warm and consistent.
+            </p>
+          </section>
+
+          <section className="rounded-2xl bg-white p-6 shadow-sm">
+            <h3 className="text-2xl font-extrabold text-emerald-900">
+              Quick Check-In
+            </h3>
+            <p className="mt-2 text-slate-600">
+              Add a timeline entry instantly.
+            </p>
+
+            <div className="mt-5 flex flex-wrap gap-3">
+              <button
+                onClick={() => handleAddTimeline('Call')}
+                className="rounded-xl bg-emerald-700 px-5 py-3 font-semibold text-white transition hover:bg-emerald-800"
+              >
+                📞 Call
+              </button>
+              <button
+                onClick={() => handleAddTimeline('Text')}
+                className="rounded-xl bg-sky-600 px-5 py-3 font-semibold text-white transition hover:bg-sky-700"
+              >
+                💬 Text
+              </button>
+              <button
+                onClick={() => handleAddTimeline('Video')}
+                className="rounded-xl bg-violet-600 px-5 py-3 font-semibold text-white transition hover:bg-violet-700"
+              >
+                🎥 Video
+              </button>
+            </div>
+          </section>
+        </div>
       </div>
     </div>
   )
