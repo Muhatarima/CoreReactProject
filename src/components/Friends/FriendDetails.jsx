@@ -10,7 +10,7 @@ function FriendDetails() {
     return <h2 className='text-center mt-10 text-red-500'>Friend not found</h2>
   }
 
-  const { name, picture, days_since_contact, tags, status, bio, email } = friend
+  const { name, picture, days_since_contact, tags, status, bio, email ,goal , next_due_date } = friend
 
   return (
     <div className='max-w-6xl mx-auto flex gap-5 mt-8'>
@@ -71,27 +71,31 @@ function FriendDetails() {
 
       <div>
         <section>
-          <h3 className='text-3xl font-bold text-green-900 my-5 px-6'>About</h3>
-          <p className='mb-6 text-[#64748B] px-6'>{bio}</p>
+          <h3 className='text-3xl font-bold text-green-900 my-5 px-6'>{days_since_contact}</h3>
+          <p className='mb-6 text-[#64748B] px-6'>Days Since Contact</p>
         </section>
 
         <section>
-          <h3 className='text-3xl font-bold text-green-900 my-5 px-6'>Email</h3>
-          <p className='mb-6 text-[#64748B] px-6'>{email}</p>
+          <h3 className='text-3xl font-bold text-green-900 my-5 px-6'>{goal}</h3>
+          <p className='mb-6 text-[#64748B] px-6'>Goals(Days)</p>
         </section>
 
         <section>
-          <h3 className='text-3xl font-bold text-green-900 my-5 px-6'>Status</h3>
-          <p className='mb-6 text-[#64748B] px-6'>{status}</p>
+          <h3 className='text-3xl font-bold text-green-900 my-5 px-6'>{next_due_date}</h3>
+          <p className='mb-6 text-[#64748B] px-6'>Next Due</p>
         </section>
 
         <section>
           <div className='px-6'>
-            <h3 className='text-3xl font-bold text-green-900 my-5'>Reminder</h3>
-            <button className='btn btn-outline px-4 py-2'>Set Reminder</button>
+           <div className='flex justify-between'>
+             <h3 className='text-3xl font-bold text-green-900 my-5'>Reminder</h3>
+             <button className='btn btn-outline px-4 py-2'>Edit</button>
+           </div>
+            
           </div>
-          <p className='px-6 text-[#64748B] mt-2'>Remind yourself to reconnect later.</p>
-        </section>
+<p className='px-6 text-[#64748B] mt-2'>
+                {`Connects Every <span className="font-bold text-black text-sm">${goal} Days</span>`}
+            </p>        </section>
 
         <section>
           <h3 className='text-3xl font-bold text-green-900 my-5 px-6'>Action</h3>
