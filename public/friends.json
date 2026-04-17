@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "name": "Alex Johnson",
+    "picture": "https://randomuser.me/api/portraits/men/32.jpg",
+    "email": "alex.johnson@example.com",
+    "days_since_contact": 18,
+    "status": "overdue",
+    "tags": ["college", "close friend"],
+    "bio": "Met at university. We usually catch up over coffee and talk about career plans.",
+    "goal": 14,
+    "next_due_date": "2026-04-20"
+  },
+  {
+    "id": 2,
+    "name": "Sarah Khan",
+    "picture": "https://randomuser.me/api/portraits/women/44.jpg",
+    "email": "sarah.khan@example.com",
+    "days_since_contact": 8,
+    "status": "almost due",
+    "tags": ["work", "mentor"],
+    "bio": "Former teammate who always gives the best advice on work and growth.",
+    "goal": 10,
+    "next_due_date": "2026-04-19"
+  },
+  {
+    "id": 3,
+    "name": "Maya Rahman",
+    "picture": "https://randomuser.me/api/portraits/women/65.jpg",
+    "email": "maya.rahman@example.com",
+    "days_since_contact": 3,
+    "status": "on-track",
+    "tags": ["school", "bestie"],
+    "bio": "One of my closest friends from school. We share memes and life updates all the time.",
+    "goal": 7,
+    "next_due_date": "2026-04-24"
+  },
+  {
+    "id": 4,
+    "name": "Daniel Lee",
+    "picture": "https://randomuser.me/api/portraits/men/54.jpg",
+    "email": "daniel.lee@example.com",
+    "days_since_contact": 21,
+    "status": "overdue",
+    "tags": ["gym", "travel"],
+    "bio": "Travel buddy and gym partner. Always planning the next adventure.",
+    "goal": 14,
+    "next_due_date": "2026-04-16"
+  },
+  {
+    "id": 5,
+    "name": "Nadia Islam",
+    "picture": "https://randomuser.me/api/portraits/women/33.jpg",
+    "email": "nadia.islam@example.com",
+    "days_since_contact": 9,
+    "status": "almost due",
+    "tags": ["family", "cousin"],
+    "bio": "Family favorite. We usually talk about food, family events, and future goals.",
+    "goal": 10,
+    "next_due_date": "2026-04-18"
+  },
+  {
+    "id": 6,
+    "name": "Ryan Cooper",
+    "picture": "https://randomuser.me/api/portraits/men/76.jpg",
+    "email": "ryan.cooper@example.com",
+    "days_since_contact": 2,
+    "status": "on-track",
+    "tags": ["project", "tech"],
+    "bio": "Tech friend who loves building side projects and discussing startup ideas.",
+    "goal": 7,
+    "next_due_date": "2026-04-25"
+  }
+]
