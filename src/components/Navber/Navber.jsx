@@ -1,38 +1,38 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 
-const Navber = () => {
+function Navber() {
+  const navClass = ({ isActive }) =>
+    `px-4 py-2 rounded-full font-medium transition ${
+      isActive
+        ? 'bg-emerald-700 text-white'
+        : 'text-slate-700 hover:bg-emerald-100'
+    }`
 
-    const [Active,setActive]=useState("Home")
   return (
-    <div  className=" text-black bg-white">
+    <nav className="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
+      <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4">
+        <NavLink to="/" className="text-3xl font-extrabold text-emerald-900">
+          KeenKeeper
+        </NavLink>
 
-
-<div className="navbar px-8 shadow-sm">
-  <div className="navbar-start">
-    <div className="dropdown">
-      <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
+        <div className="flex items-center gap-2">
+          <NavLink to="/" className={navClass}>
+            <span className="mr-2">🏠</span>
+            Home
+          </NavLink>
+          <NavLink to="/timeline" className={navClass}>
+            <span className="mr-2">📜</span>
+            Timeline
+          </NavLink>
+          <NavLink to="/stats" className={navClass}>
+            <span className="mr-2">📊</span>
+            Stats
+          </NavLink>
+        </div>
       </div>
-     
-    </div>
-<p className=" font-bold text-2xl">
-  <span>
-    Keen<span className="text-green-800">Keeper</span>
-  </span>
-</p>  </div>
-  
-  <div className="navbar-end gap-2">
-    <button onClick={()=>setActive("Home")} className={Active === "Home" ? "btn border-none hover:bg-emerald-900 text-white bg-emerald-800" : "btn btn-outline" } >Home</button>
-    <button onClick={()=>setActive("Timeline")} className={Active === "Timeline" ? " btn border-none hover:bg-emerald-900 text-white bg-emerald-800" : "btn btn-outline"} >Timeline</button>
-    <button onClick={()=>setActive("Stats")} className={Active === "Stats" ? "btn border-none hover:bg-emerald-900 text-white bg-emerald-800" : "btn btn-outline"} >Stats</button>
-  </div>
-</div>
-
-
-
-        
-    </div>
+    </nav>
   )
 }
 
-export default Navber;
+export default Navber
